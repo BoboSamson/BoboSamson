@@ -1,0 +1,18 @@
+18 occurs
+15 at
+15 This
+9 Astana
+8 times
+6 Minsk
+4 twice
+4 time
+4 three
+4 one
+3 this
+3 in
+3 Moscow
+2 once
+2 four
+1 two
+1 five
+Total word frequencies across all files:
