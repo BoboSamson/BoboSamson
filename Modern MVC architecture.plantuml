@@ -1,0 +1,86 @@
+@startuml Samsar MVC_ERP_Component_Diagram
+
+!define SERVER #lightblue
+!define SERVICE #lightyellow
+!define DB #lightgreen
+!define UI #lightpink
+!define API #lightgray
+
+package "Presentation Layer" <<UI>> {
+  [Web UI] 
+  [Mobile UI]
+  [API Gateway] <<API>>
+}
+
+package "Controller Layer" <<SERVER>> {
+  [Order Controller]
+  [Finance Controller]
+  [Logistics Controller]
+  [Communication Controller]
+}
+
+package "Service Layer" <<SERVICE>> {
+  [Order Service]
+  [Finance Service]
+  [Logistics Service]
+  [Communication Service]
+}
+
+package "Model Layer" <<DB>> {
+  [Order Model]
+  [Invoice Model]
+  [Shipment Model]
+  [Customer Model]
+}
+
+package "Data Layer" <<DB>> {
+  [PostgreSQL DB]
+  [MongoDB]
+  [Redis Cache]
+}
+
+' Relationships
+[Web UI] --> [API Gateway]
+[Mobile UI] --> [API Gateway]
+[API Gateway] --> [Order Controller]
+[API Gateway] --> [Finance Controller]
+[API Gateway] --> [Logistics Controller]
+[API Gateway] --> [Communication Controller]
+
+[Order Controller] --> [Order Service]
+[Finance Controller] --> [Finance Service]
+[Logistics Controller] --> [Logistics Service]
+[Communication Controller] --> [Communication Service]
+
+[Order Service] --> [Order Model]
+[Finance Service] --> [Invoice Model]
+[Logistics Service] --> [Shipment Model]
+[Communication Service] --> [Customer Model]
+
+[Order Model] --> [PostgreSQL DB]
+[Invoice Model] --> [PostgreSQL DB]
+[Shipment Model] --> [MongoDB]
+[Customer Model] --> [Redis Cache]
+
+' Event-driven messaging
+package "Event Bus (Kafka/RabbitMQ)" <<API>> {
+  [Event Queue]
+}
+
+[Order Service] --> [Event Queue]
+[Finance Service] --> [Event Queue]
+[Logistics Service] --> [Event Queue]
+[Communication Service] --> [Event Queue]
+
+' External Integrations
+package "External Systems" <<API>> {
+  [CRM System]
+  [Accounting System]
+  [Shipping API]
+}
+
+[API Gateway] --> [CRM System]
+[Finance Service] --> [Accounting System]
+[Logistics Service] --> [Shipping API]
+
+@enduml

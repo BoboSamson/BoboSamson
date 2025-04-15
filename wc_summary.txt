@@ -1,0 +1,16 @@
+Generating word, line, and character counts...
+------------------------------------------------
+File: f1.tsv
+Lines:        6 | Words:       34 | Characters:      194
+--------------------------------
+File: f2.tsv
+Lines:        6 | Words:       34 | Characters:      188
+--------------------------------
+File: f3.tsv
+Lines:        6 | Words:       34 | Characters:      188
+--------------------------------
+TOTAL COUNTS ACROSS ALL FILES:
+Total Lines: 18
+Total Words: 102
+Total Characters: 570
+------------------------------------------------

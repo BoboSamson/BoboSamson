@@ -1,0 +1,50 @@
+@startuml Samsar_Engineering_Use_Cases
+
+' Define Actors
+actor Customer
+actor "Sales Rep" as SalesRep
+actor "Logistics Manager" as LogisticsManager
+actor Supplier
+
+' Define Subsystems (Packages)
+package "Order Management" {
+  usecase "Place Order" as PO
+  usecase "Request Quotation" as RQ
+  usecase "Generate Sales Documents" as GSD
+}
+
+package "Logistics" {
+  usecase "Schedule Delivery" as SD
+  usecase "Ship Products" as SP
+  usecase "Import Freight Provider" as IFP
+}
+
+package "Finance" {
+  usecase "Generate Invoice" as GI
+  usecase "Process Freight Invoice" as PFI
+}
+
+package "Communication" {
+  usecase "Notify Customer" as NC
+  usecase "Provide Feedback" as PF
+}
+
+' Relationships: Actors to Use Cases
+Customer --> PO
+SalesRep --> RQ
+LogisticsManager --> SD
+LogisticsManager --> SP
+LogisticsManager --> IFP
+Supplier --> IFP
+
+' Relationships: Include/Extend
+PO .> RQ : <<extend>>
+SP .> SD : <<include>>
+GI .> GSD : <<include>>
+PFI .> IFP : <<extend>>
+
+' Relationships: Communication
+SP ..> NC : triggers
+Customer --> PF
+
+@enduml
